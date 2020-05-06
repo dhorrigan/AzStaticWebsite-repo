@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>Ajax | POC</title>
+    <style>
+          table {
+          border-style: hidden;
+          }
+          table th {
+          border-style: solid;
+          }
+
+          .chord{
+          color: brown;
+          font-size:12pt;
+          font-family:"Comic Sans MS";
+          border-style: hidden;
+          }
+          .chordSmall{
+          color: brown;
+          font-size:8pt;
+          font-family:"Comic Sans MS";
+          border-style: hidden;
+          }
+          .chordHeader{
+          color: brown;
+          font-size:8pt;
+          font-family:"Comic Sans MS";
+          border-style: hidden;
+          }
+
+          .lyric{
+          color: brown;
+          font-size:12pt;
+          font-family: arial;
+          border-style: hidden;
+          }
+
+          .chartTitle{
+          font-size:11pt;
+          font-family: arial;
+          }
+
+          .Artist{
+          font-size:8pt;
+          font-family: arial;
+          }
+
+          .footer{
+          font-size:8pt;
+          font-family: arial;
+          border-style: hidden;
+          }
+
+          .group{
+          font-size:9pt;
+          border-style: hidden;
+          }
+          #otherGroup{
+          }
+    </style>
+    
+    <script language="javascript">
+        /*@cc_on
+        document.write("JScript version: " + @_jscript_version + ".<br>");
+        /*@if (@_jscript_version >= 5)
+        document.write("JScript Version 5.0 or better.<br \/>");
+        document.write("This text is only seen by browsers that support JScript 5+<br>");
+        @else @*/
+                    document.write("This text is seen by all other browsers (ie: Firefox, IE 4.x etc)<br>");
+                /*@end
+
+        @if (@_win32)
+        document.write("OS is 32-bit. Browser is IE.");
+        @else
+                      document.write("OS is NOT 32-bit. Browser is IE.");
+                   @end
+        @*/
+
+        function HttpRequest(url) {
+            var pageRequest = false //variable to hold ajax object
+            /*@cc_on
+            @if (@_jscript_version >= 5)
+            try {
+                pageRequest = new ActiveXObject("Msxml2.XMLHTTP")
+            }
+            catch (e) {
+                try {
+                    pageRequest = new ActiveXObject("Microsoft.XMLHTTP")
+                }
+                catch (e2) {
+                    pageRequest = false
+                }
+            }
+            @end
+            @*/
+
+            if (!pageRequest && typeof XMLHttpRequest != 'undefined')
+                pageRequest = new XMLHttpRequest()
+
+            if (pageRequest) { //if pageRequest is not false
+                pageRequest.open('GET', url, false) //get page synchronously 
+                pageRequest.send(null)
+                embedpage(pageRequest)
+            }
+
+            return pageRequest
+        }
+
+        function embedpage(request) {
+            //if viewing page offline or the document was successfully retrieved online (status code=2000)
+            if (window.location.href.indexOf("http") == -1 || request.status == 200) {
+                document.write(request.responseText)
+            }
+
+            document.write("we are here")
+        }
+
+        function AjaxUpdateContentMain(url) {
+            var pageRequest = false //variable to hold ajax object
+            /*@cc_on
+            @if (@_jscript_version >= 5)
+            try {
+                pageRequest = new ActiveXObject("Msxml2.XMLHTTP")
+            }
+            catch (e) {
+                try {
+                    pageRequest = new ActiveXObject("Microsoft.XMLHTTP")
+                }
+                catch (e2) {
+                    pageRequest = false
+                }
+            }
+            @end
+            @*/
+
+            if (!pageRequest && typeof XMLHttpRequest != 'undefined')
+                pageRequest = new XMLHttpRequest()
+
+            if (pageRequest) { //if pageRequest is not false
+                pageRequest.open('GET', url, false) //get page synchronously 
+                pageRequest.send(null)
+                EmbedContentMain(pageRequest)
+            }
+
+            return pageRequest
+        }
+
+        function EmbedContentMain(request) {
+            //if viewing page offline or the document was successfully retrieved online (status code=2000)
+            if (window.location.href.indexOf("http") == -1 || request.status == 200) {
+
+                document.getElementById('content_main').innerHTML = request.responseText;
+            }
+
+            //document.write("over here")
+        }
+
+        function TestSetInnerHtml() {
+            document.getElementById('content_main').innerHTML = 'Fred Flinstone'
+        }
+
+            
+    </script>
+</head>
+
+<body>
+<script type="text/javascript">
+    function changeContent_Main(uri) {
+
+        AjaxUpdateContentMain(uri)
+
+    }
+</script>
+
+<script language="javascript">
+    TestSetInnerHtml()
+</script>
+
+        <script language="javascript">
+
+            //HttpRequest("Lodi.html") //include "Lodi.html" onto current page
+
+            //TestSetInnerHtml()
+
+            function nothing() {
+            }
+
+            function toggleBoth() {
+                var ele = document.getElementById("toggleAssetsBoth");
+                var text = document.getElementById("displayTextAssetsBoth");
+                if (ele.style.display == "block") {
+                    ele.style.display = "none";
+                    text.innerHTML = "[Show Assets in DB and Fast]";
+                }
+                else {
+                    ele.style.display = "block";
+                    text.innerHTML = "[Hide Assets in DB and Fast]";
+                }
+            }
+
+            function toggleDb() {
+                var ele = document.getElementById("toggleAssetsDb");
+                var text = document.getElementById("displayTextAssetsDb");
+                if (ele.style.display == "block") {
+                    ele.style.display = "none";
+                    text.innerHTML = "[Show Assets in DB Not in Fast]";
+                }
+                else {
+                    ele.style.display = "block";
+                    text.innerHTML = "[Hide Assets in DB Not in Fast]";
+                }
+            }
+
+            function toggleFast() {
+                var ele = document.getElementById("toggleAssetsFast");
+                var text = document.getElementById("displayTextAssetsFast");
+                if (ele.style.display == "block") {
+                    ele.style.display = "none";
+                    text.innerHTML = "[Show Assets in Fast Not in DB]";
+                }
+                else {
+                    ele.style.display = "block";
+                    text.innerHTML = "[Hide Assets in Fast Not in DB]";
+                }
+            }
+
+        </script>
+
+<div id="container">
+
+<div id="header">
+  <h1>Ajax<span class="off">POC</span></h1>
+  <h2>by David Horrigan, Ediacara Productions</h2>
+</div>
+        
+<p>Ajax test button</p> 
+<input type='button' onclick='changeContent_Main("charts/Riding That Midnight Train.html")' value='Change Content_Main'/>
+
+<div id="menu">
+    <ul>
+        <li class="menuitem"><a href="#">Home</a></li>
+        <li class="menuitem"><a href="#">About</a></li>
+        <li class="menuitem"><a href="#">Music Charts</a></li>
+        <li class="menuitem"><a href="#">Scales</a></li>
+        <li class="menuitem"><a href="#">Contact</a></li>
+    </ul>
+</div>
+        
+<div id="leftmenu">
+
+  <div id="leftmenu_top"></div>
+  <div id="leftmenu_main">    
+    <h3>Songs</h3>
+    <ul>
+        <li><a href="#">Dark Hollow</a></li>
+        <li><a href="#">Midnight Moonlight</a></li>
+    </ul>
+  </div>
+  <div id="leftmenu_bottom"></div>
+</div>
+        
+<div id="content">
+        
+  <div id="content_top"></div>
+  <div id="content_main">
+<hr /><table><tr><td align="left" class="chartTitle"><b>Cotton Fields</b></td><td align="left" class="Artist">Creedence Clearwater Revival</td></tr><tr><td><table><table><tr><td colwidth="2" align="left" class="chordHeader">verse</td></tr><tr><td><table><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">G</td><td width="23" class="chordSmall">G/</td><td width="23" class="chord">C</td><td width="23" class="chord">G</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">1</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">G</td><td width="23" class="chord">D</td><td width="23" class="chord">D</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">5</td><td width="23" class="chord">5</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">G</td><td width="23" class="chord">C</td><td width="23" class="chord">G</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">4</td><td width="23" class="chord">1</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">D</td><td width="23" class="chordSmall">G/C</td><td width="23" class="chord">G</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">5</td><td width="23" class="chord">1</td><td width="23" class="chord">1</td></tr></table></td></tr></table></td></tr></table><table><tr><td colwidth="2" align="left" class="chordHeader">chorus</td></tr><tr><td><table><tr><td><table><tr><td width="23" class="chord">C</td><td width="23" class="chord">C</td><td width="23" class="chord">G</td><td width="23" class="chord">G</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">4</td><td width="23" class="chord">4</td><td width="23" class="chord">4</td><td width="23" class="chord">4</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">G</td><td width="23" class="chord">D</td><td width="23" class="chord">D</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">5</td><td width="23" class="chord">5</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">G</td><td width="23" class="chord">C</td><td width="23" class="chord">G</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">1</td><td width="23" class="chord">4</td><td width="23" class="chord">1</td></tr></table></td></tr><tr><td><table><tr><td width="23" class="chord">G</td><td width="23" class="chord">D</td><td width="23" class="chordSmall">G/C</td><td width="23" class="chordSmall">G/</td></tr></table></td><td width="50" /><td><table><tr><td width="23" class="chord">1</td><td width="23" class="chord">5</td><td width="23" class="chord">1</td><td width="23" class="chord">1</td></tr></table></td></tr></table></td></tr></table></table></td></tr><tr><td><table><table><tr><td><table><tr><td><table><tr><td colwidth="2" align="left" class="lyric"></td></tr><tr><td><table><tr><td class="lyric">When I was a little itty bitty baby,my momma would rock me in the cradle,</td></tr><tr><td class="lyric">In them old cotton fields back home.</td></tr><tr><td class="lyric">It was down in louisiana just about a mile from Texarkana,</td></tr><tr><td class="lyric">In them old cotton fields back home.</td></tr></table></td></tr></table></td></tr></table><table><tr><td /></tr></table><table><tr><td><table><tr><td width="30">.</td></tr></table></td><td><table><tr><td colwidth="2" align="left" class="lyric">chorus</td></tr><tr><td><table><tr><td class="lyric">When them cotton balls get rotten, You can't pick very much cotton,</td></tr><tr><td class="lyric">In them old cotton fields back home.</td></tr><tr><td class="lyric">It was down in Louisiana just about a mile from Texarkana,</td></tr><tr><td class="lyric">In them old cotton fields back home.</td></tr></table></td></tr></table></td></tr></table><table><tr><td /></tr></table></td></tr></table></table></td></tr></table><hr /><table><tr><td class="footer">
+              Transcription by David Horrigan, Ediacara Productions, all rights reserved
+            </td><td /><td class="footer">2/29/2012</td></tr></table>
+  </div>
+  <div id="content_bottom"></div>
+            
+  <div id="footer">
+    <h3><a href="http://www.bryantsmith.com">florida web design</a></h3>
+  </div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>
