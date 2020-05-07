@@ -25,9 +25,9 @@ steps:
     deploymentName: 'DeployPipelineTemplate'
 
 - task: CopyFiles@2
-displayName: 'Copy generated content'
-inputs:
-  SourceFolder: '$(Build.SourcesDirectory)/CreateWebApp'
-  contents: '**\*'
-  targetFolder: $(Build.ArtifactStagingDirectory)/output
-  cleanTargetFolder: true
+  displayName: 'Copy generated content'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/CreateWebApp'
+    contents: '**\*'
+    targetFolder: $(Build.ArtifactStagingDirectory)/output
+    cleanTargetFolder: true
