@@ -28,6 +28,6 @@ steps:
   displayName: 'Copy generated content from $(Build.SourcesDirectory) to $(Build.ArtifactStagingDirectory)/output'
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
-    contents: '**\*'
+    contents: '**/*'
     targetFolder: $(Build.ArtifactStagingDirectory)/output
     cleanTargetFolder: true
