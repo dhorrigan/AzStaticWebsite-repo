@@ -23,3 +23,11 @@ steps:
     overrideParameters: '-projectName dh20200507 -linkedTemplateUri https://raw.githubusercontent.com/dhorrigan/AzStaticWebsite-repo/master/azureresources/linkedStorageAccount.json'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
+
+- task: CopyFiles@2
+displayName: 'Copy generated content'
+inputs:
+  SourceFolder: '$(Build.SourcesDirectory)/CreateWebApp'
+  contents: '**\*'
+  targetFolder: $(Build.ArtifactStagingDirectory)/output
+  cleanTargetFolder: true
