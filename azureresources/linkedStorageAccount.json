@@ -40,7 +40,7 @@
       "location": "[parameters('location')]",
 	  "tags":{
 		  "displayName": "GitHubRepo | CICD Full",
-		  "releaseId": "ver20200519.1",
+		  "releaseId": "ver20200519.2",
 		  "site": "GitHubRepoCICD Full"
 	  },
       "sku": {
