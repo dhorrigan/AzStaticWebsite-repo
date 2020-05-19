@@ -39,7 +39,8 @@
       "name": "[parameters('storageAccountName')]",
       "location": "[parameters('location')]",
 	  "tags":{
-		  "displayName": "MyBlobStorage"
+		  "displayName": "GitHubRepo | CICD Full",
+		  "releaseId": "ver20200519.0"
 	  },
       "sku": {
         "name": "[parameters('storageSKU')]"
