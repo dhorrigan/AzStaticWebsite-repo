@@ -10,8 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo we are here
-    echo we are also here
+- script: echo $'1 we are here\n'
+    echo 1.1 we are also here
+
+- script: echo $'2 we are here\n'
+    echo 2.1 we are also here\n
+
+- script: echo $'3 we are here\n'
+    echo 3.1 we are also here\n
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
