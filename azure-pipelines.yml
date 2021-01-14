@@ -17,7 +17,8 @@ steps:
     echo 2.1 we are also here\n
 
 - script: echo $'3 we are here\n'
-    echo 3.1 we are also here\n
+    '3.1 we are also here\n'
+    3.2 we are also here
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
