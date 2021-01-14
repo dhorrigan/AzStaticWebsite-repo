@@ -21,6 +21,10 @@ steps:
     $'3.2 we are also here'
     3.3 we are also here
 
+- script: echo '$(Build.BuildNumber)'
+
+- script: echo $(Build.BuildNumber)
+
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
