@@ -62,7 +62,7 @@ stages:
         steps:
           - step: TestStep1
             displayName: "Test Step 1"
-            - script: echo '$(Build.BuildNumber)'
+          - script: echo '$(Build.BuildNumber)'
 
           - step: TestStep2
             displayName: "Test Step 2"
