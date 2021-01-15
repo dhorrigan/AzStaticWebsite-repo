@@ -75,3 +75,5 @@ stages:
         displayName: "Test Job 2"
         steps:
           - script: echo $'2 we are here\n'
+
+          - script: echo '$(Build.BuildNumber)'
