@@ -19,51 +19,51 @@ stages:
         steps:
           - step: TestStep1
             displayName: "Test Step 1"
-          - script: echo '$(Build.BuildNumber)'
+          # - script: echo '$(Build.BuildNumber)'
 
-          - step: TestStep2
-            displayName: "Test Step 2"
-          - script: echo '$(Build.BuildNumber)'
+          # - step: TestStep2
+          #   displayName: "Test Step 2"
+          # - script: echo '$(Build.BuildNumber)'
 
-          - script: echo $'1 we are here\n'
-              echo 1.1 we are also here
+          # - script: echo $'1 we are here\n'
+          #     echo 1.1 we are also here
 
-          - script: echo $'2 we are here\n'
-              echo 2.1 we are also here\n
+          # - script: echo $'2 we are here\n'
+          #     echo 2.1 we are also here\n
 
-          - script: echo $'3 we are here\n'
-              $'3.1 we are also here\n'
-              $'3.2 we are also here'
-              3.3 we are also here
+          # - script: echo $'3 we are here\n'
+          #     $'3.1 we are also here\n'
+          #     $'3.2 we are also here'
+          #     3.3 we are also here
 
-          - script: echo '$(Build.BuildNumber)'
+          # - script: echo '$(Build.BuildNumber)'
 
-          - script: echo $(Build.BuildNumber)
+          # - script: echo $(Build.BuildNumber)
 
-          - task: AzureResourceManagerTemplateDeployment@3
-            inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: 'AzureRmPipeline-conn'
-              subscriptionId: '2f106c03-9b32-42ee-be11-99d0286aba1a'
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: 'AzureRmPipeline-rg'
-              location: 'West US 2'
-              templateLocation: 'Linked artifact'
-              csmFile: 'azureresources/azuredeploy.json'
-              overrideParameters: '-projectName githubrepo -linkedTemplateUri https://raw.githubusercontent.com/dhorrigan/AzStaticWebsite-repo/master/azureresources/linkedStorageAccount.json'
-              deploymentMode: 'Incremental'
-              deploymentName: 'DeployPipelineTemplate'
+          # - task: AzureResourceManagerTemplateDeployment@3
+          #   inputs:
+          #     deploymentScope: 'Resource Group'
+          #     azureResourceManagerConnection: 'AzureRmPipeline-conn'
+          #     subscriptionId: '2f106c03-9b32-42ee-be11-99d0286aba1a'
+          #     action: 'Create Or Update Resource Group'
+          #     resourceGroupName: 'AzureRmPipeline-rg'
+          #     location: 'West US 2'
+          #     templateLocation: 'Linked artifact'
+          #     csmFile: 'azureresources/azuredeploy.json'
+          #     overrideParameters: '-projectName githubrepo -linkedTemplateUri https://raw.githubusercontent.com/dhorrigan/AzStaticWebsite-repo/master/azureresources/linkedStorageAccount.json'
+          #     deploymentMode: 'Incremental'
+          #     deploymentName: 'DeployPipelineTemplate'
 
-          - task: CopyFiles@2
-            displayName: 'Copy generated content from $(Build.SourcesDirectory) to $(Build.ArtifactStagingDirectory)'
-            inputs:
-              SourceFolder: '$(Build.SourcesDirectory)'
-              contents: '**/*'
-              targetFolder: $(Build.ArtifactStagingDirectory)
-              cleanTargetFolder: true
+          # - task: CopyFiles@2
+          #   displayName: 'Copy generated content from $(Build.SourcesDirectory) to $(Build.ArtifactStagingDirectory)'
+          #   inputs:
+          #     SourceFolder: '$(Build.SourcesDirectory)'
+          #     contents: '**/*'
+          #     targetFolder: $(Build.ArtifactStagingDirectory)
+          #     cleanTargetFolder: true
 
-          - task: PublishBuildArtifacts@1
-            displayName: 'Publish Artifacts'
-            inputs:
-              PathToPublish: '$(Build.ArtifactStagingDirectory)'
+          # - task: PublishBuildArtifacts@1
+          #   displayName: 'Publish Artifacts'
+          #   inputs:
+          #     PathToPublish: '$(Build.ArtifactStagingDirectory)'
 
