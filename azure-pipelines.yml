@@ -55,16 +55,16 @@ stages:
               deploymentMode: 'Incremental'
               deploymentName: 'DeployPipelineTemplate'
 
-          # - task: CopyFiles@2
-          #   displayName: 'Copy generated content from $(Build.SourcesDirectory) to $(Build.ArtifactStagingDirectory)'
-          #   inputs:
-          #     SourceFolder: '$(Build.SourcesDirectory)'
-          #     contents: '**/*'
-          #     targetFolder: $(Build.ArtifactStagingDirectory)
-          #     cleanTargetFolder: true
+          - task: CopyFiles@2
+            displayName: 'Copy generated content from $(Build.SourcesDirectory) to $(Build.ArtifactStagingDirectory)'
+            inputs:
+              SourceFolder: '$(Build.SourcesDirectory)'
+              contents: '**/*'
+              targetFolder: $(Build.ArtifactStagingDirectory)
+              cleanTargetFolder: true
 
-          # - task: PublishBuildArtifacts@1
-          #   displayName: 'Publish Artifacts'
-          #   inputs:
-          #     PathToPublish: '$(Build.ArtifactStagingDirectory)'
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish Artifacts'
+            inputs:
+              PathToPublish: '$(Build.ArtifactStagingDirectory)'
 
