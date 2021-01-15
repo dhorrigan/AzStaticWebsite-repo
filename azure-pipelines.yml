@@ -68,3 +68,10 @@ stages:
             inputs:
               PathToPublish: '$(Build.ArtifactStagingDirectory)'
 
+  - stage: TestStage2
+    displayName: "Test Stages2"
+    jobs:
+      - job: TestJob2
+        displayName: "Test Job 2"
+        steps:
+          - script: echo $'2 we are here\n'
