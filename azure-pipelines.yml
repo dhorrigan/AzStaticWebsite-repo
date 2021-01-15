@@ -70,8 +70,8 @@ stages:
 
   - stage: TestStage2
     displayName: "Test Stages2"
-    dependsOn: TestStage
-      - 
+    dependsOn:
+      - TestStage
     jobs:
       - job: TestJob2
         displayName: "Test Job 2"
