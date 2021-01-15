@@ -52,3 +52,18 @@ steps:
   displayName: 'Publish Artifacts'
   inputs:
     PathToPublish: '$(Build.ArtifactStagingDirectory)'
+
+stages:
+  - stage: TestStage
+    displayName: "Test Stages"
+    jobs:
+      - job: TestJob1
+        displayName: "Test Job 1"
+        steps:
+          - step: TestStep1
+            displayName: "Test Step 1"
+            - script: echo '$(Build.BuildNumber)'
+
+          - step: TestStep2
+            displayName: "Test Step 2"
+            - script: echo '$(Build.BuildNumber)'
