@@ -17,8 +17,9 @@ stages:
       - job: TestJob1
         displayName: "Test Job 1"
         steps:
-          - step: TestStep1
-            displayName: "Test Step 1"
+          - script: echo $'3 we are here\n'
+          # - step: TestStep1
+          #   displayName: "Test Step 1"
           # - script: echo '$(Build.BuildNumber)'
 
           # - step: TestStep2
